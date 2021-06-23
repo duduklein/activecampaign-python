@@ -1,3 +1,5 @@
+import time
+
 import requests
 
 from .automations import Automations
@@ -53,9 +55,15 @@ class Client(object):
         if headers:
             _headers.update(headers)
 
-        return self._parse(requests.request(method, self.BASE_URL + endpoint, headers=_headers, **kwargs))
+        response = self._parse(requests.request(method, self.BASE_URL + endpoint, headers=_headers, **kwargs))
+        if response is None:
+            time.sleep(5 * 60)
+            reponse = self._parse(requests.request(method, self.BASE_URL + endpoint, headers=_headers, **kwargs))
+        return reponse
 
     def _parse(self, response):
+        if response.status_code == "403":
+            return None
         if 'application/json' in response.headers['Content-Type']:
             r = response.json()
         else:
