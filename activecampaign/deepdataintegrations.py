@@ -27,7 +27,7 @@ class DeepDataIntegrations(object):
 
         """
         return self.client._get("/connections/{}".format(connection_id))
-    
+
     def update_a_connection(self, connection_id, data):
         """
         Update an existing connection resource
@@ -41,7 +41,7 @@ class DeepDataIntegrations(object):
 
         """
         return self.client._put("/connections/{}".format(connection_id), json=data)
-    
+
     def delete_a_connection(self, connection_id):
         """
         Delete an existing connection resource
@@ -54,9 +54,9 @@ class DeepDataIntegrations(object):
 
         """
         return self.client._delete("/connections/{}".format(connection_id))
-    
-    def list_all_connections(self):
-        raise NotImplementedError
+
+    def list_all_connections(self, **params):
+        return self.client._get("/connections", params=params)
 
     def create_an_ecommerce_customer(self, data):
         """
@@ -97,7 +97,7 @@ class DeepDataIntegrations(object):
 
         """
         return self.client._put("/ecomCustomers/{}".format(customer_id), json=data)
-    
+
     def delete_an_ecommerce_customer(self, customer_id):
         """
         Delete an existing e-commerce customer resource
@@ -111,8 +111,18 @@ class DeepDataIntegrations(object):
         """
         return self.client._delete("/ecomCustomers/{}".format(customer_id))
 
-    def list_all_ecommerce_customer(self):
-        raise NotImplementedError
+    def list_all_ecommerce_customers(self, **params):
+        """
+        Lists all ecommerce customers within
+
+
+        Args:
+            params: filtres (email, externalid, connectionid)
+
+        Returns:
+
+        """
+        return self.client._get("/ecomCustomers", params=params)
 
     def create_an_ecommerce_order(self, data):
         """
@@ -153,8 +163,8 @@ class DeepDataIntegrations(object):
         """
         return self.client._delete("/ecomOrders/{}".format(order_id))
 
-    def list_all_ecommerce_orders(self):
-        raise NotImplementedError
+    def list_all_ecommerce_orders(self, **params):
+        return self.client._get("/ecomOrders", params=params)
 
     def update_an_ecommerce_order(self, order_id, data):
         """

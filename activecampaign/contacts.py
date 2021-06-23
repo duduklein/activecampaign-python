@@ -93,6 +93,9 @@ class Contacts(object):
         """
         return self.client._get("/contacts", params=params)
 
+    def bulk_import_contacts(self, data):
+        return self.client._post("/import/bulk_import", json=data)
+
     def list_all_automations_the_contacts_is_in(self, contact_id):
         """
 
