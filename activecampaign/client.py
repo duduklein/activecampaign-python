@@ -58,8 +58,8 @@ class Client(object):
         response = self._parse(requests.request(method, self.BASE_URL + endpoint, headers=_headers, **kwargs))
         if response is None:
             time.sleep(5 * 60)
-            reponse = self._parse(requests.request(method, self.BASE_URL + endpoint, headers=_headers, **kwargs))
-        return reponse
+            response = self._parse(requests.request(method, self.BASE_URL + endpoint, headers=_headers, **kwargs))
+        return response
 
     def _parse(self, response):
         if response.status_code == "403":
