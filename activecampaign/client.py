@@ -62,7 +62,7 @@ class Client(object):
         return response
 
     def _parse(self, response):
-        if response.status_code == "403":
+        if int(response.status_code) in (403, 503):
             return None
         if 'application/json' in response.headers['Content-Type']:
             r = response.json()
